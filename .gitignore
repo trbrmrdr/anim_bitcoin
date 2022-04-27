@@ -66,13 +66,11 @@ node_modules/
 .env
 
 node_modules
-sources/dist/
+sources/dist/*
 
 
 .DS_store
 .idea
 
 package-lock.json
-
-dist/*
 

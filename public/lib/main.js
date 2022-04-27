@@ -8,7 +8,6 @@ var camera, scene, renderer, stats, mixer, obj_coin;
 
 window.onload = function () {
 	const canvas_container = document.getElementById("canvas-container");
-	canvas_container.style.backgroundColor = '#202036';
 	init();
 	animate();
 
