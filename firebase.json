@@ -1,0 +1,14 @@
+{
+  "hosting": {
+    "public": "public",
+    "ignore": [
+      "firebase.json",
+      "**/gulpfile.js",
+      "**/.*",
+      "**/node_modules/**",
+
+      "publis/lib/pixi-spine/*",
+      "publis/lib/v6.0.0-rc.2/*"
+    ]
+  }
+}

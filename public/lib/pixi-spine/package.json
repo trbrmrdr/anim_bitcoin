@@ -1,0 +1,104 @@
+{
+  "_from": "pixi-spine",
+  "_id": "pixi-spine@3.0.13",
+  "_inBundle": false,
+  "_integrity": "sha512-OvnkRV1VlNroaoYdIY+srcYfnJLl0v1y616eZNqv4fpt1WF2iTeC63MhIjA/GlLy3FLFghQF4isVq2baJ0IL9w==",
+  "_location": "/pixi-spine",
+  "_phantomChildren": {},
+  "_requested": {
+    "type": "tag",
+    "registry": true,
+    "raw": "pixi-spine",
+    "name": "pixi-spine",
+    "escapedName": "pixi-spine",
+    "rawSpec": "",
+    "saveSpec": null,
+    "fetchSpec": "latest"
+  },
+  "_requiredBy": [
+    "#DEV:/",
+    "#USER"
+  ],
+  "_resolved": "https://registry.npmjs.org/pixi-spine/-/pixi-spine-3.0.13.tgz",
+  "_shasum": "9d01ccbab6a83d9f71d03922470638e996f424b2",
+  "_spec": "pixi-spine",
+  "_where": "/Users/trbrmrdr/Documents/CubAnimations/Web",
+  "author": {
+    "name": "Ivan Igorevich Popelyshev",
+    "email": "ivan.popelyshev@gmail.com"
+  },
+  "bugs": {
+    "url": "https://github.com/pixijs/pixi-spine/issues"
+  },
+  "bundle": "dist/pixi-spine.umd.js",
+  "bundleDependencies": false,
+  "contributors": [
+    {
+      "name": "Mat Groves"
+    },
+    {
+      "name": "Chad Engler",
+      "email": "chad@pantherdev.com"
+    },
+    {
+      "name": "Richard Davey",
+      "email": "rdavey@gmail.com"
+    },
+    {
+      "name": "Shukant K. Pal",
+      "email": "shukantpal@outlook.com"
+    },
+    {
+      "name": "Yevhenii Huselietov",
+      "email": "d46k16@gmail.com"
+    }
+  ],
+  "dependencies": {
+    "@pixi-spine/base": "~3.0.13",
+    "@pixi-spine/loader-base": "~3.0.13",
+    "@pixi-spine/loader-uni": "~3.0.13",
+    "@pixi-spine/runtime-3.7": "~3.0.13",
+    "@pixi-spine/runtime-3.8": "~3.0.13",
+    "@pixi-spine/runtime-4.0": "~3.0.13"
+  },
+  "deprecated": false,
+  "description": "Pixi integration with EsotericSoftware Spine, big, contains all runtimes",
+  "devDependencies": {
+    "@pixi-spine/eslint-config": "~1.0.0",
+    "@pixi-spine/rollup-config": "~1.0.0",
+    "chai": "~4.2.0",
+    "eslint": "~7.13.0",
+    "prepend": "=1.0.2",
+    "rimraf": "3.0.2",
+    "rollup": "^2.53.3",
+    "tslib": "~2.2.0",
+    "typescript": "~4.2.3"
+  },
+  "files": [
+    "lib",
+    "dist",
+    "*.d.ts",
+    "SPINE-LICENSE"
+  ],
+  "homepage": "https://github.com/pixijs/pixi-spine/#readme",
+  "keywords": [
+    "pixi.js",
+    "pixi",
+    "spine"
+  ],
+  "license": "SEE SPINE-LICENSE",
+  "main": "lib/all.js",
+  "module": "lib/all.es.js",
+  "name": "pixi-spine",
+  "namespace": "PIXI.spine",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pixijs/pixi-spine.git"
+  },
+  "scripts": {
+    "build": "rollup -c rollup.config.js --silent",
+    "build:types": "rimraf compile && tsc -p tsconfig-api.json && api-extractor run"
+  },
+  "types": "./index.d.ts",
+  "version": "3.0.13"
+}

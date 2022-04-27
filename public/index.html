@@ -1,0 +1,76 @@
+<head>
+    <style>
+        body,
+        html {
+            margin: 0px;
+            height: 100%;
+        }
+
+
+        #canvas-container {
+            width: 50%;
+            height: auto;
+
+            touch-action: none;
+            cursor: inherit;
+            display: block;
+        }
+
+
+        #stages button {
+            margin: 5px;
+        }
+    </style>
+</head>
+
+<body>
+    <script src="./lib/from_fbx/fflate.min.js"></script>
+    <script src="./lib/from_fbx/three.js"></script>
+
+    <script src="./lib/from_fbx/OrbitControls.js"></script>
+    <script src="./lib/stats.js/build/stats.min.js"></script>
+
+    <script src="dist/main.js?6.1"></script>
+
+
+
+    <div id="stages" style="padding: 5px;
+    border: solid 2px green;
+    margin: 5px;">
+
+        <div>
+            <button onclick="window.setType(0)">Вариант А</button>
+            <button onclick="window.setType(1)">Вариант B</button>
+        </div>
+
+        <div>
+            <button
+                onclick="window.start(document.getElementById('input_fade').value,document.getElementById('input_speed').value)">Start</button>
+            <input type="number" id="input_fade" value="3.0">
+        </div>
+
+
+        <div>
+            <button onclick="window.rotate(document.getElementById('input_speed').value)">Rotate</button>
+            <input type="number" id="input_speed" value="2.0">
+        </div>
+
+        <div>
+            <button
+                onclick="window.stop(document.getElementById('input_ft').value,document.getElementById('input_ar').checked)">Stop</button>
+            <input type="number" id="input_ft" value="2.5" title="Fade time">
+
+            <label for="input_ar">Avers/Revers</label>
+            <input type="checkbox" id="input_ar" checked name="input_ar">
+        </div>
+
+    </div>
+
+    <!-- <button onclick="btn_click();">click</button> -->
+    <div id="canvas-container">
+
+    </div>
+
+    <input type="range" id="volume_range" name="volume" style="width: 100%;" min="0" max="100">
+
+</body>

@@ -1,0 +1,12 @@
+{
+    
+    "files": [
+        "public/lib/main_fbx.js"
+    ],
+
+    "compilerOptions": {
+        "noImplicitAny": true,
+        "target": "es5",
+         "moduleResolution": "node"
+    }
+}
