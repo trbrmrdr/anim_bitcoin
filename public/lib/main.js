@@ -29,7 +29,6 @@ window.create_anim = function (id_block, type = 0) {
 
 		scene = new THREE.Scene();
 		// scene.background = new THREE.Color(0x414168,);
-		// scene.background = null;
 
 		loader.load(
 			t_type == 0 ? "data/scene_2.json" : "data/scene.json",

@@ -7,13 +7,15 @@
         }
 
 
-        #canvas-container {
-            width: 50%;
+        #canvas-container,
+        #canvas-container_2 {
+            /* background-color: #202036; */
+            width: 40%;
             height: auto;
 
             touch-action: none;
             cursor: inherit;
-            display: block;
+            display: inline-block;
         }
 
 
@@ -24,10 +26,9 @@
 </head>
 
 <body>
-    <script src="./lib/from_fbx/fflate.min.js"></script>
     <script src="./lib/from_fbx/three.js"></script>
 
-    <script src="./lib/from_fbx/OrbitControls.js"></script>
+
     <script src="./lib/stats.js/build/stats.min.js"></script>
 
     <script src="dist/main.js?6.1"></script>
@@ -38,11 +39,7 @@
     border: solid 2px green;
     margin: 5px;">
 
-        <div>
-            <button onclick="window.setType(0)">Вариант А</button>
-            <button onclick="window.setType(1)">Вариант B</button>
-        </div>
-
+    
         <div>
             <button
                 onclick="window.start(document.getElementById('input_fade').value,document.getElementById('input_speed').value)">Start</button>
@@ -66,10 +63,19 @@
 
     </div>
 
-    <!-- <button onclick="btn_click();">click</button> -->
-    <div id="canvas-container">
 
+    <div>
+        <div id="canvas-container" ></div>
+        <div id="canvas-container_2" ></div>
+            
     </div>
+
+    <script>
+        window.onload = () => {
+            window.create_anim("canvas-container", 0);
+            window.create_anim("canvas-container_2", 1);
+        }
+    </script>
 
     <input type="range" id="volume_range" name="volume" style="width: 100%;" min="0" max="100">
 
