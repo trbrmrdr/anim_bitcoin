@@ -1,20 +1,11 @@
 
-const CANVAS_SIZE = {
-	width: 1024,
-	height: 1024,
-}
-
+const CANVAS_SIZE = { width: 1024, height: 1024 }
+const clock = new THREE.Clock();
+const loader = new THREE.ObjectLoader();
 var canvas_container_size = { width: 0, height: 0 }
 
-let camera, scene, renderer, stats;
+var camera, scene, renderer, stats, mixer, obj_coin;
 
-const clock = new THREE.Clock();
-let mixer;
-
-const loader = new THREE.ObjectLoader();
-
-var obj_coin;
-var t_type = 0;
 window.onload = function () {
 	const canvas_container = document.getElementById("canvas-container");
 	canvas_container.style.backgroundColor = '#202036';
@@ -28,14 +19,21 @@ window.onload = function () {
 		// 	// scene.background = null;
 
 		loader.load(
-			t_type == 0 ? "data/scene_2.json" : "data/scene.json",
+			"data/scene_2.json",
+
 			function (obj) {
+				if (obj.parent) {
+					// console.log("load compmlete");
+					return;
+				}
+
 				obj_coin = obj.getObjectByName("Coin_finish.glb");
 				scene.add(obj);
+
 			},
 
 			function (xhr) {
-				console.log((xhr.loaded / xhr.total * 100) + '% loaded');
+				// console.log((xhr.loaded / xhr.total * 100) + '% loaded');
 			},
 
 			function (err) {
@@ -47,15 +45,6 @@ window.onload = function () {
 		camera = new THREE.PerspectiveCamera(45, CANVAS_SIZE.width / CANVAS_SIZE.height, 1, 500);
 		camera.position.set(0, 0, 27);
 
-		// const grid = new THREE.GridHelper(2000, 20, 0x000000, 0x000000);
-		// 	// grid.material.opacity = 0.2;
-		// 	// grid.material.transparent = true;
-		// scene.add(grid);
-
-		// 	//#####################################################################
-
-
-
 		renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
 		renderer.setClearColor(0x000000, 0);
 		renderer.setPixelRatio(window.devicePixelRatio);
@@ -64,26 +53,19 @@ window.onload = function () {
 		renderer.shadowMapSort = true;
 		canvas_container.appendChild(renderer.domElement);
 
-		// const controls = new THREE.OrbitControls(camera, renderer.domElement);
-		// controls.target.set(0, 0, 0);
-		// controls.update();
-
 		window.addEventListener('resize', onWindowResize);
 
 		// stats
 		stats = new Stats();
 		stats.dom.style.left = '480px';
 		document.body.appendChild(stats.dom);
+		//end stats
 
 		onWindowResize();
 		onWindowResize();
 	}
 
 	function onWindowResize() {
-
-		// camera.aspect = window.innerWidth / window.innerHeight;
-		// camera.updateProjectionMatrix();
-
 		let new_width = canvas_container.clientWidth
 		let new_height = new_width / CANVAS_SIZE.width * CANVAS_SIZE.height;
 		if (canvas_container.clientWidth < canvas_container.clientHeight) {
@@ -92,8 +74,6 @@ window.onload = function () {
 		canvas_container_size = { width: new_width, height: new_height };
 
 		renderer.setSize(new_width, new_height);
-		// main_view.scale.set(new_width / CANVAS_SIZE.width);
-
 	}
 
 	//###########################################################################
@@ -106,8 +86,6 @@ window.onload = function () {
 			curr_angle = duration * val.target.value / 100.0;
 		});
 	} catch { }
-
-	var timestamp = Date.now();
 
 	var frame_ds = 0;
 	var start_time = -1;
@@ -124,8 +102,6 @@ window.onload = function () {
 	function animate() {
 		const delta = clock.getDelta();
 		if (isPlay) {
-
-			//________________________________________________________
 			const now = Date.now();
 
 			let new_angle = NaN;
@@ -172,16 +148,11 @@ window.onload = function () {
 				new_angle = curr_angle + delta * duration * curr_speed;
 			}
 			curr_angle = new_angle % duration;
-			//________________________________________________________
 		}
-		// console.log(curr_angle);
-
-
 		if (mixer) mixer.update(delta);
 		renderer.render(scene, camera);
 		stats.update();
 		if (obj_coin) {
-
 			obj_coin.setRotationFromAxisAngle(new THREE.Vector3(0, 1, 0), curr_angle);
 		}
 		requestAnimationFrame(animate);
@@ -216,10 +187,10 @@ window.onload = function () {
 
 	window.setType = function (id) {
 		document.body.removeChild(stats.dom);
-		
+
 		canvas_container.removeChild(renderer.domElement);
 		renderer.dispose();
-	
+
 		canvas_container_size = { width: 0, height: 0 }
 		obj_coin = undefined;
 
@@ -230,25 +201,10 @@ window.onload = function () {
 
 };
 
-// 
-
-
-const easeOutQuart = function (x) {
-	// x = x + 0.1
-	return 1 - Math.pow(1 - x, 4);
-}
-
 const easeOutSine = function (x) {
 	return Math.sin((x * Math.PI) / 2);
 }
 const easeInSine = function (x) {
 	if (x == Infinity || x == -Infinity) return 0;
-	// return x;
 	return 1 - Math.cos((x * Math.PI) / 2)
-
-	// const c1 = 1.70158;
-	// const c3 = c1 + 1;
-
-	// return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
-
 }
