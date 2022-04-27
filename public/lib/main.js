@@ -1,31 +1,35 @@
 
-const CANVAS_SIZE = {
-	width: 1024,
-	height: 1024,
-}
 
-var canvas_container_size = { width: 0, height: 0 }
+// stats
+var stats = new Stats();
+stats.dom.style.left = '480px';
+document.body.appendChild(stats.dom);
+//
 
-let camera, scene, renderer, stats;
+window.create_anim = function (id_block, type = 0) {
 
-const clock = new THREE.Clock();
-let mixer;
+	const CANVAS_SIZE = {
+		width: 1024,
+		height: 1024,
+	}
+	var canvas_container_size = { width: 0, height: 0 }
+	var camera, scene, renderer, mixer, obj_coin;
 
-const loader = new THREE.ObjectLoader();
+	var t_type = type;
 
-var obj_coin;
-var t_type = 0;
-window.onload = function () {
-	const canvas_container = document.getElementById("canvas-container");
-	canvas_container.style.backgroundColor = '#202036';
+	const clock = new THREE.Clock();
+	const loader = new THREE.ObjectLoader();
+
+	const canvas_container = document.getElementById(id_block);
+
 	init();
 	animate();
 
 	function init() {
 
 		scene = new THREE.Scene();
-		scene.background = new THREE.Color(0x414168,);
-		// 	// scene.background = null;
+		// scene.background = new THREE.Color(0x414168,);
+		// scene.background = null;
 
 		loader.load(
 			t_type == 0 ? "data/scene_2.json" : "data/scene.json",
@@ -70,19 +74,12 @@ window.onload = function () {
 
 		window.addEventListener('resize', onWindowResize);
 
-		// stats
-		stats = new Stats();
-		stats.dom.style.left = '480px';
-		document.body.appendChild(stats.dom);
 
 		onWindowResize();
 		onWindowResize();
 	}
 
 	function onWindowResize() {
-
-		// camera.aspect = window.innerWidth / window.innerHeight;
-		// camera.updateProjectionMatrix();
 
 		let new_width = canvas_container.clientWidth
 		let new_height = new_width / CANVAS_SIZE.width * CANVAS_SIZE.height;
@@ -92,8 +89,6 @@ window.onload = function () {
 		canvas_container_size = { width: new_width, height: new_height };
 
 		renderer.setSize(new_width, new_height);
-		// main_view.scale.set(new_width / CANVAS_SIZE.width);
-
 	}
 
 	//###########################################################################
@@ -107,7 +102,6 @@ window.onload = function () {
 		});
 	} catch { }
 
-	var timestamp = Date.now();
 
 	var frame_ds = 0;
 	var start_time = -1;
@@ -215,11 +209,10 @@ window.onload = function () {
 
 
 	window.setType = function (id) {
-		document.body.removeChild(stats.dom);
-		
+
 		canvas_container.removeChild(renderer.domElement);
 		renderer.dispose();
-	
+
 		canvas_container_size = { width: 0, height: 0 }
 		obj_coin = undefined;
 
@@ -243,12 +236,5 @@ const easeOutSine = function (x) {
 }
 const easeInSine = function (x) {
 	if (x == Infinity || x == -Infinity) return 0;
-	// return x;
-	return 1 - Math.cos((x * Math.PI) / 2)
-
-	// const c1 = 1.70158;
-	// const c3 = c1 + 1;
-
-	// return 1 + c3 * Math.pow(x - 1, 3) + c1 * Math.pow(x - 1, 2);
-
+	return 1 - Math.cos((x * Math.PI) / 2);
 }
